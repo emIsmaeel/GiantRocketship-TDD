@@ -7,7 +7,7 @@ export class ContactForm extends BasePage implements IContactForm {
     private readonly firstName: string = '[id^="firstname"]';
     private readonly lastName: string = '[id^="lastname"]';
     private readonly email: string = "[id^='email']";
-    private readonly comment: string = "[id^='contact_notes']";
+    private readonly comment: string = "[name='form_notes']";
     private readonly submitBtn: string = 'input[value="Submit"]';
     private readonly firstNameError: string = '[class^="hs_firstname"]';
     private readonly lastNameError: string = '[class^="hs_lastname"]';

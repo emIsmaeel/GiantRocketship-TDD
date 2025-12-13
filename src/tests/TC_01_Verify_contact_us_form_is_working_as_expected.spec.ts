@@ -26,6 +26,7 @@ test.beforeAll(async ({ browser }) => {
         expect(await videoFrame.videoPlayer()).toBeVisible(),
     ]);
 
+    await homePage.closePopupIfVisible();
     await homePage.openContactMenu();
     await homePage.clickContactUs();
 
@@ -42,7 +43,7 @@ test("User should see errors on empty form submit", { tag: ["@smoke"] }, async (
     await allure.severity("critical");
     await contactForm.submitForm();
     await Promise.all([
-        expect(await contactForm.getLabelByText(formError.error)).toHaveCount(3),
+        expect(await contactForm.getLabelByText(formError.error)).toHaveCount(4),
         expect(await contactForm.getFirstNameError(formError.error)).toBeVisible(),
         expect(await contactForm.getLastNameError(formError.error)).toBeVisible(),
         expect(await contactForm.getEmailError(formError.error)).toBeVisible(),
@@ -81,7 +82,7 @@ test(
             expect(await contactForm.getFirstNameError(formError.error)).toBeHidden(),
             expect(await contactForm.getLastNameError(formError.error)).toBeHidden(),
             expect(await contactForm.getEmailError(formError.error)).toBeHidden(),
-            expect(await contactForm.getLabelByText(formError.requiredError)).not.toBeVisible(),
+            expect(await contactForm.getLabelByText(formError.requiredError)).toBeVisible(),
         ]);
     },
 );

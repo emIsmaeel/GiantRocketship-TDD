@@ -9,6 +9,8 @@ export class HomePage extends BasePage {
     private readonly videoFrame: string = "iframe.elementor-video";
     private readonly contactMenu: string = '[class$="parent"]:has-text("Contact")';
     private readonly contactUs: string = '[href$="contact"]';
+    private readonly handlePopup: string = '[id="interactive-close-button"]';
+
 
     async homePageTitle(): Promise<Locator> {
         return this.page.locator(this.pageHeading).first();
@@ -35,5 +37,15 @@ export class HomePage extends BasePage {
 
     async clickContactUs(): Promise<void> {
         await this.page.locator(this.contactUs).first().click();
+    }
+
+    async closePopupIfVisible(): Promise<void> {
+        await this.page.waitForTimeout(5000);
+        try {
+            const frame = this.page.frameLocator('iframe[data-test-id="interactive-frame"]');
+            await frame.locator(this.handlePopup).click();
+        } catch (error) {
+
+        }
     }
 }
